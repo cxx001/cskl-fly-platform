@@ -24,15 +24,15 @@ export default {
     }
   },
   mounted () {
-    this.$router.push({ name: "ModelListIndex", params: {}});
+    this.$router.push({ name: "ModelList", params: {}});
   },
   methods:{
     onChange(e) {
       console.log(`checked = ${e.target.value}`);
       if (e.target.value == 1) {
-        this.$router.push({ name: "ModelListIndex", params: {}});
+        this.$router.push({ name: "ModelList", params: {}});
       } else {
-        this.$router.push({ name: "ModelTreeIndex", params: {}});
+        this.$router.push({ name: "ModelTree", params: {}});
       }
     },
 

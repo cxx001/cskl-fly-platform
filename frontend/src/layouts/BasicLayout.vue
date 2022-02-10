@@ -64,7 +64,7 @@ export default {
         "OverviewIndex",
         "ModelIndex",
         "SimulationIndex",
-        "AssessmentIndex",
+        "ReportIndex",
         "ResourceIndex",
         "",
         "",

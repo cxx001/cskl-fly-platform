@@ -25,18 +25,21 @@
         >
             <div ref="containerRef" class="screen-container">
                 <div id="canvas" :style="canvasStyle" >
-                    <panelGrid :gridSize="gridSize" :pageSize="pageSize" />
+                    <PanelGrid :gridSize="gridSize" :pageSize="pageSize" />
                     <slot name="butterfly"></slot>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script>
-import panelGrid from "./panel-grid.vue"
 import SketchRule from "vue-sketch-ruler";
+import PanelGrid from "./panel-grid.vue"
+
 const rectWidth = 1960;
 const rectHeight = 1960;
+
 export default {
     data() {
         return {
@@ -66,7 +69,7 @@ export default {
     },
     components: {
         SketchRule,
-        panelGrid
+        PanelGrid
     },
     computed: {
         shadow() {

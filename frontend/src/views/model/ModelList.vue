@@ -12,7 +12,7 @@
           "
           ref="node1"
         >
-          <dragNode :itemData="node1" />
+          <DragNode :itemData="node1" />
         </div>
       </a-collapse-panel>
       <a-collapse-panel key="2" header="姿态动力学元件">
@@ -26,7 +26,7 @@
           "
           ref="node2"
         >
-          <dragNode :itemData="node2" />
+          <DragNode :itemData="node2" />
         </div>
       </a-collapse-panel>
       <a-collapse-panel key="3" header="质心动力学元件">
@@ -40,7 +40,7 @@
           "
           ref="node3"
         >
-          <dragNode :itemData="node3" />
+          <DragNode :itemData="node3" />
         </div>
       </a-collapse-panel>
       <a-collapse-panel key="4" header="动力系统元件">
@@ -54,7 +54,7 @@
           "
           ref="node4"
         >
-          <dragNode :itemData="node4" />
+          <DragNode :itemData="node4" />
         </div>
       </a-collapse-panel>
       <a-collapse-panel key="5" header="坐标转化系统">
@@ -68,7 +68,7 @@
           "
           ref="node5"
         >
-          <dragNode :itemData="node5" />
+          <DragNode :itemData="node5" />
         </div>
       </a-collapse-panel>
     </a-collapse>
@@ -76,11 +76,11 @@
 </template>
 
 <script>
-import dragNode from './node/drag-node.vue';
+import DragNode from './drag-node.vue';
 
 export default {
   components: {
-    dragNode
+    DragNode
   },
 
   data(){

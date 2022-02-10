@@ -11,11 +11,11 @@ const RouteView = {
 export const constantRouterMap = [
   // 登录页
   {
-    path: '/',
+    path: '/login',
     component: RouteView,
     children: [
       {
-        path: "/",
+        path: "/login",
         redirect: "/login/login-index"
       },
       {
@@ -43,49 +43,49 @@ export const constantRouterMap = [
   },
   // 主界面
   {
-    path: '/main',
+    path: '/',
     component: () => import('@/layouts/BasicLayout'),
     children: [
       {
-        path: "/main",
-        redirect: "/main/model/index"
+        path: "/",
+        redirect: "/model/index"
       },
       {
-        path: "/main/overview/index",
+        path: "/overview/index",
         name: "OverviewIndex",
-        component: () => import("@/views/main/overview/Index"),
+        component: () => import("@/views/overview/Index"),
       },
       {
-        path: "/main/model/index",
+        path: "/model/index",
         name: "ModelIndex",
-        component: () => import("@/views/main/model/Index"),
+        component: () => import("@/views/model/Index"),
         children: [
           {
-            path: "/main/model/ModelListIndex",
-            name: "ModelListIndex",
-            component: () => import("@/views/main/model/ModelListIndex")
+            path: "/model/ModelList",
+            name: "ModelList",
+            component: () => import("@/views/model/ModelList")
           },
           {
-            path: "/main/model/ModelTreeIndex",
-            name: "ModelTreeIndex",
-            component: () => import("@/views/main/model/ModelTreeIndex")
+            path: "/model/ModelTree",
+            name: "ModelTree",
+            component: () => import("@/views/model/ModelTree")
           }
         ]
       },
       {
-        path: "/main/simulation/index",
+        path: "/simulation/index",
         name: "SimulationIndex",
-        component: () => import("@/views/main/simulation/Index"),
+        component: () => import("@/views/simulation/Index"),
       },
       {
-        path: "/main/assessment/index",
-        name: "AssessmentIndex",
-        component: () => import("@/views/main/assessment/Index"),
+        path: "/report/index",
+        name: "ReportIndex",
+        component: () => import("@/views/report/Index"),
       },
       {
-        path: "/main/resource/index",
+        path: "/resource/index",
         name: "ResourceIndex",
-        component: () => import("@/views/main/resource/Index"),
+        component: () => import("@/views/resource/Index"),
       },
     ]
   }
