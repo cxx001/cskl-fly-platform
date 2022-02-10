@@ -40,7 +40,7 @@
         </a-menu>
       </a-layout-sider>
 
-      <a-layout-content>
+      <a-layout-content style="overflow: hidden">
         <router-view />
       </a-layout-content>
     </a-layout>

@@ -15,7 +15,6 @@
           />
         </template>
       </PanelRuler>
-      
     </div>
     <div class="flex-item-right">属性面板</div>
   </div>
@@ -24,7 +23,7 @@
 <script>
 import { ButterflyVue } from "butterfly-vue";
 import LeftPanel from "./LeftPanel.vue";
-import PanelRuler from "./ruler/panel-ruler.vue"
+import PanelRuler from "./ruler/panel-ruler.vue";
 import DragNode from "./drag-node.vue";
 
 export default {
@@ -44,25 +43,26 @@ export default {
         zoomable: true, // 可放大
         moveable: true, // 可平移
         theme: {
-            edge: {
-                arrow: true,
-                type: 'endpoint',
-                shapeType: 'Manhattan',
-                arrowPosition: 1,
-                defaultAnimate: true
+          edge: {
+            arrow: true,
+            type: "endpoint",
+            shapeType: "Manhattan",
+            arrowPosition: 1,
+            defaultAnimate: true,
+          },
+          endpoint: {
+            position: [], //限制锚点位置['Top', 'Bottom', 'Left', 'Right'],
+            linkableHighlight: true, //连线时会触发point.linkable的方法，可做高亮
+            limitNum: 10, //限制锚点的连接数目
+            expandArea: {
+              //锚点过小时，可扩大连线热区
+              left: 10,
+              right: 10,
+              top: 10,
+              botton: 10,
             },
-            endpoint: {
-                position: [],        //限制锚点位置['Top', 'Bottom', 'Left', 'Right'],
-                linkableHighlight: true,//连线时会触发point.linkable的方法，可做高亮
-                limitNum: 10,        //限制锚点的连接数目
-                expandArea: {        //锚点过小时，可扩大连线热区
-                    left: 10,
-                    right: 10,
-                    top: 10,
-                    botton: 10
-                }
-            },
-        }
+          },
+        },
       },
       canvansRef: {},
       mockData: {
@@ -134,6 +134,7 @@ export default {
   height: 100%;
   margin-top: 5px;
   z-index: 2;
+  position:relative;
 }
 
 .flex-item-middle ::v-deep .butterfly-vue-container {

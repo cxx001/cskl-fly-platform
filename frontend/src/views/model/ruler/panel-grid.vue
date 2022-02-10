@@ -5,56 +5,63 @@
       class="horizontal"
       v-for="item in horizontalLineCount"
       :key="item + 'horizontal'"
-      :style="{top: gridSize.height * (item - 1) + 'px'}">
-    </div>
+      :style="{ top: gridSize.height * (item - 1) + 'px' }"
+    ></div>
     <!-- 竖线 -->
-    <div 
+    <div
       class="vertical"
-      v-for="item in verticalLineCount" 
-      :key="item+'vertical'"
-      :style="{left: gridSize.width * (item - 1) + 'px'}">
-    </div>
+      v-for="item in verticalLineCount"
+      :key="item + 'vertical'"
+      :style="{ left: gridSize.width * (item - 1) + 'px' }"
+    ></div>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'guide',
-    props: {
-      gridSize: Object,
-      pageSize: Object,
-    },
-    data() {
-      return {
-        horizontalLineCount: 0,
-        verticalLineCount: 0,
-      }
-    },
-    watch: {
+  name: "guide",
+  props: {
+    pageSize: Object,
+  },
+  data() {
+    return {
+      horizontalLineCount: 0,
+      verticalLineCount: 0,
       gridSize: {
-        handler(newValue, oldValue) {
-          this.calc();
-        },
-        deep: true,
+        width: 20,
+        height: 20,
       }
+    };
+  },
+  watch: {
+    gridSize: {
+      handler(newValue, oldValue) {
+        this.calc();
+      },
+      deep: true,
     },
-    mounted () {
-      this.calc();
-    },
-    methods: {
-      calc () {
-        if (this.gridSize.width === 0 || this.gridSize.height === 0) {
-          console.warn('gridSize is zero!')
-          return;
-        }
-        let width = this.pageSize.width - 2;
-        let height = this.pageSize.height - 2;
-        this.verticalLineCount = Math.ceil(width / this.gridSize.width);
-        this.horizontalLineCount = Math.ceil(height / this.gridSize.height);
-        console.log('verticalLineCount = %d, horizontalLineCount=%d.', this.verticalLineCount, this.horizontalLineCount);
+  },
+  mounted() {
+    this.calc();
+  },
+  methods: {
+    calc() {
+      if (this.gridSize.width === 0 || this.gridSize.height === 0) {
+        console.warn("gridSize is zero!");
+        return;
       }
-    }
-}
+      let width = this.pageSize.width - 2;
+      let height = this.pageSize.height - 2;
+      this.verticalLineCount = Math.ceil(width / this.gridSize.width);
+      this.horizontalLineCount = Math.ceil(height / this.gridSize.height);
+      console.log(
+        "verticalLineCount = %d, horizontalLineCount=%d.",
+        this.verticalLineCount,
+        this.horizontalLineCount
+      );
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -78,5 +85,4 @@ export default {
     border-right: 1px dotted #d6d6d6;
   }
 }
-
 </style>

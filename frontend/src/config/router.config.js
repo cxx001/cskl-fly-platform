@@ -11,11 +11,11 @@ const RouteView = {
 export const constantRouterMap = [
   // 登录页
   {
-    path: '/login',
+    path: '/',
     component: RouteView,
     children: [
       {
-        path: "/login",
+        path: "/",
         redirect: "/login/login-index"
       },
       {
@@ -43,11 +43,11 @@ export const constantRouterMap = [
   },
   // 主界面
   {
-    path: '/',
+    path: '/model',
     component: () => import('@/layouts/BasicLayout'),
     children: [
       {
-        path: "/",
+        path: "/model",
         redirect: "/model/index"
       },
       {
