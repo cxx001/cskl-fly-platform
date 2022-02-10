@@ -4,3 +4,7 @@ logs/
 run/
 .idea/
 package-lock.json
+.travis.yml
+appveyor.yml
+nodejs.yml
+
