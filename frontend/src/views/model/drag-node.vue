@@ -26,10 +26,10 @@ export default {
 
 <style scoped>
   .drag-node {
-    width: 100px;
-    height: 60px;
+    width: 60px;
+    height: 40px;
     background-color: gray;
-    padding-top: 20px;
+    padding-top: 10px;
   }
 
 </style>

@@ -121,7 +121,7 @@ export default {
   methods:{
     dragstart(e,node) {
       e.dataTransfer.setData('node',JSON.stringify(node));
-      e.dataTransfer.setDragImage(this.$refs[node.ref],50,30);
+      e.dataTransfer.setDragImage(this.$refs[node.ref],30,20);
     },
   }
 };
@@ -130,7 +130,7 @@ export default {
 <style scoped>
 .node-container {
   margin: 5px;
-  width: 100px;
+  width: 60px;
 }
 
 .model-collapse-panel {

@@ -25,15 +25,15 @@
             <a-icon type="project" />
             <span>评估</span>
           </a-menu-item>
-          <a-menu-item key="5">
+          <a-menu-item key="5" class="memu-item-custom-5">
             <a-icon type="table" />
             <span>资源</span>
           </a-menu-item>
-          <a-menu-item key="6">
+          <a-menu-item key="6" class="memu-item-custom-6">
             <a-icon type="user" />
             <span>用户</span>
           </a-menu-item>
-          <a-menu-item key="7">
+          <a-menu-item key="7" class="memu-item-custom-7">
             <a-icon type="setting" />
             <span>设置</span>
           </a-menu-item>
@@ -90,5 +90,20 @@ export default {
   bottom: 0px;
   position: absolute;
   width: 100%;
+}
+
+.memu-item-custom-5 {
+  position: absolute;
+  bottom: 90px;
+}
+
+.memu-item-custom-6 {
+  position: absolute;
+  bottom: 50px;
+}
+
+.memu-item-custom-7 {
+  position: absolute;
+  bottom: 10px;
 }
 </style>
