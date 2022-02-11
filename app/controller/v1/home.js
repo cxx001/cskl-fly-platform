@@ -8,7 +8,7 @@ class HomeController extends BaseController {
     const { ctx } = this;
 
     const data = {
-      title: 'hello electron-egg'
+      title: 'hello cskl-fly-platform'
     };
 
     await ctx.render('index.ejs', data);

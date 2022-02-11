@@ -122,17 +122,15 @@ export default {
 }
 
 .flex-item-left {
-  background-color: lightgrey;
+  background-color: white;
   width: 20%;
   height: 100%;
-  margin: 5px;
 }
 
 .flex-item-middle {
-  background-color: lightgrey;
+  background-color: white;
   width: 60%;
   height: 100%;
-  margin-top: 5px;
   z-index: 2;
   position:relative;
 }
@@ -142,10 +140,9 @@ export default {
 }
 
 .flex-item-right {
-  background-color: lightgrey;
+  background-color: white;
   width: 20%;
   height: 100%;
-  margin: 5px;
   z-index: 3;
 }
 

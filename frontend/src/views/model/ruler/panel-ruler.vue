@@ -158,7 +158,7 @@ body * {
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 99%;
+  height: 100%;
   border: 1px solid #dadadc;
 }
 #screens {

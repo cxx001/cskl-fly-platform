@@ -12,9 +12,13 @@ module.exports = {
       config
         .plugin('html')
         .tap(args => {
-          args[0].title= 'electron-egg' // 设置title
+          args[0].title= 'cskl-fly-platform' // 设置title
           return args
         })
+
+      const svgRule = config.module.rule("svg");
+      svgRule.uses.clear();
+      svgRule.use("vue-svg-loader").loader("vue-svg-loader");
     },
     css: {
       loaderOptions: {

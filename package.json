@@ -1,5 +1,5 @@
 {
-  "name": "electron-egg",
+  "name": "cskl-fly-platform",
   "version": "1.16.2",
   "description": "A fast, desktop software development framework",
   "main": "main.js",
@@ -12,16 +12,16 @@
     "build-m": "electron-builder -m",
     "build-m-arm64": "electron-builder -m --arm64",
     "build-l": "electron-builder -l deb tar.xz",
-    "web-start": "egg-scripts start --daemon --title=electron-egg --ignore-stderr --env=prod --workers=1",
-    "web-stop": "egg-scripts stop --title=electron-egg",
+    "web-start": "egg-scripts start --daemon --title=cskl-fly-platform --ignore-stderr --env=prod --workers=1",
+    "web-stop": "egg-scripts stop --title=cskl-fly-platform",
     "web-dev": "egg-bin dev",
     "rd": "node ./tools/replace_dist --dist_dir=./frontend/dist",
     "compress": "node ./tools/code_compress --compress",
     "restore": "node ./tools/code_compress --restore"
   },
   "build": {
-    "productName": "electron-egg",
-    "appId": "com.electron.electron-egg",
+    "productName": "cskl-fly-platform",
+    "appId": "com.electron.cskl-fly-platform",
     "copyright": "wallace5303",
     "directories": {
       "output": "out"
@@ -53,7 +53,7 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "https://github.com/wallace5303/electron-egg"
+        "url": "https://github.com/wallace5303/cskl-fly-platform"
       }
     ],
     "mac": {
@@ -81,7 +81,7 @@
       ]
     }
   },
-  "repository": "https://github.com/wallace5303/electron-egg.git",
+  "repository": "https://github.com/wallace5303/cskl-fly-platform.git",
   "keywords": [
     "Electron",
     "Egg"

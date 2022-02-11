@@ -1,7 +1,12 @@
 <template>
   <a-layout id="components-layout-basic">
-    <a-layout-header>Header</a-layout-header>
-    <a-layout id="components-layout-side" style="position: absolute; top: 35px; bottom: 25px; left: 0px; right: 0px">
+    <a-layout-header>
+      <Header />
+    </a-layout-header>
+    <a-layout
+      id="components-layout-side"
+      style="position: absolute; top: 35px; bottom: 25px; left: 0px; right: 0px"
+    >
       <a-layout-sider v-model="collapsed" collapsible :trigger="null">
         <a-menu
           theme="dark"
@@ -44,11 +49,16 @@
         <router-view />
       </a-layout-content>
     </a-layout>
-    <a-layout-footer>Footer</a-layout-footer>
+    <a-layout-footer>
+      <Footer />
+    </a-layout-footer>
   </a-layout>
 </template>
 
 <script>
+import Header from "./Header.vue";
+import Footer from "./Footer.vue";
+
 export default {
   name: "AppSider",
   data() {
@@ -57,9 +67,14 @@ export default {
     };
   },
 
+  components: {
+    Header,
+    Footer,
+  },
+
   methods: {
     menuHandle(item) {
-      console.log('click:' + item.key);
+      console.log("click:" + item.key);
       let pageNames = [
         "OverviewIndex",
         "ModelIndex",
@@ -68,8 +83,8 @@ export default {
         "ResourceIndex",
         "",
         "",
-      ]
-      this.$router.push({ name: pageNames[item.key-1], params: {} });
+      ];
+      this.$router.push({ name: pageNames[item.key - 1], params: {} });
     },
   },
 };

@@ -45,7 +45,7 @@ const config = {
     //titleBarStyle: 'hidden'
   },
   egg: {
-    title: 'electron-egg', // 进程的title属性标识（默认你的应用名称-英文）
+    title: 'cskl-fly-platform', // 进程的title属性标识（默认你的应用名称-英文）
     env: 'prod',
     port: 7068,
     hostname: 'localhost',
@@ -61,7 +61,7 @@ const config = {
     }
   },
   awakeProtocol: {
-    protocol: 'electron-egg', // 自定义协议名（默认你的应用名称-英文）
+    protocol: 'cskl-fly-platform', // 自定义协议名（默认你的应用名称-英文）
     args: []
   },
   crashReport: {
