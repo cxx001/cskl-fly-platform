@@ -155,10 +155,10 @@ body * {
 .wrapper {
   background-color: #f5f5f5;
   position: absolute;
-  top: 0px;
+  bottom: 0px;
   left: 0px;
   width: 100%;
-  height: 100%;
+  height: 94%;
   border: 1px solid #dadadc;
 }
 #screens {
