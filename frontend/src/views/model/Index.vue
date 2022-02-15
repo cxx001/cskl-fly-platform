@@ -4,75 +4,88 @@
       <LeftPanel />
     </div>
     <div class="flex-item-middle" @dragover="dragover" @drop="addNode">
-      <div>
-        <a-tabs
-          v-model="activeKey"
-          type="editable-card"
-          @edit="onEdit"
-          size="small"
-          style="float: left"
-        >
-          <a-tab-pane
-            v-for="pane in panes"
-            :key="pane.key"
-            :tab="pane.title"
-            :closable="pane.closable"
+      <div class="middle-top">
+        <div>
+          <a-tabs
+            v-model="activeKey"
+            type="editable-card"
+            @edit="onEdit"
+            size="small"
+            style="float: left"
           >
-            {{ pane.content }}
-          </a-tab-pane>
-        </a-tabs>
+            <a-tab-pane
+              v-for="pane in panes"
+              :key="pane.key"
+              :tab="pane.title"
+              :closable="pane.closable"
+            >
+              {{ pane.content }}
+            </a-tab-pane>
+          </a-tabs>
+        </div>
+
+        <div style="width: 100%; margin-left: 73%; position: absolute">
+          <a-row>
+            <a-col :span="1">
+              <Suoxiao class="top-scale-icon" />
+            </a-col>
+            <a-col :span="3">
+              <a-slider v-model="inputValue1" :min="1" :max="800" />
+            </a-col>
+            <a-col :span="1">
+              <FangDa class="top-scale-icon" />
+            </a-col>
+            <a-col :span="1">
+              <a-dropdown :trigger="['click']">
+                <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
+                  {{ inputValue1 + "%" }}
+                </a>
+                <a-menu slot="overlay">
+                  <a-menu-item key="0"> 重置视图 </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item key="1"> 25% </a-menu-item>
+                  <a-menu-item key="2"> 50% </a-menu-item>
+                  <a-menu-item key="3"> 75% </a-menu-item>
+                  <a-menu-item key="4"> 100% </a-menu-item>
+                  <a-menu-item key="5"> 125% </a-menu-item>
+                  <a-menu-item key="6"> 150% </a-menu-item>
+                  <a-menu-item key="7"> 200% </a-menu-item>
+                  <a-menu-item key="8"> 300% </a-menu-item>
+                  <a-menu-item key="9"> 400% </a-menu-item>
+                  <a-menu-item key="10"> 800% </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item key="11"> 适合窗口 </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </a-col>
+          </a-row>
+        </div>
       </div>
 
-      <div style="width: 100%; margin-left: 73%; position: absolute">
-        <a-row>
-          <a-col :span="1">
-            <Suoxiao class="top-scale-icon" />
-          </a-col>
-          <a-col :span="3">
-            <a-slider v-model="inputValue1" :min="1" :max="100" />
-          </a-col>
-          <a-col :span="1">
-            <FangDa class="top-scale-icon" />
-          </a-col>
-          <a-col :span="1">
-            <a-dropdown :trigger="['click']">
-              <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
-                {{ inputValue1 + "%" }}
-              </a>
-              <a-menu slot="overlay">
-                <a-menu-item key="0">
-                  <a href="http://www.alipay.com/">1st menu item</a>
-                </a-menu-item>
-                <a-menu-item key="1">
-                  <a href="http://www.taobao.com/">2nd menu item</a>
-                </a-menu-item>
-                <a-menu-divider />
-                <a-menu-item key="3"> 3rd menu item </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </a-col>
-        </a-row>
+      <div class="middle-area">
+        <PanelRuler>
+          <template v-slot:butterfly>
+            <butterfly-vue
+              className="drag"
+              :canvasData="mockData"
+              :canvasConf="canvasConf"
+              @onLoaded="finishLoaded"
+              key="drag"
+            />
+          </template>
+        </PanelRuler>
       </div>
-
-      <PanelRuler>
-        <template v-slot:butterfly>
-          <butterfly-vue
-            className="drag"
-            :canvasData="mockData"
-            :canvasConf="canvasConf"
-            @onLoaded="finishLoaded"
-            key="drag"
-          />
-        </template>
-      </PanelRuler>
     </div>
-    <div class="flex-item-right">属性面板</div>
+    <div class="flex-item-right">
+      <RightPanel/>
+    </div>
   </div>
 </template>
 
 <script>
 import { ButterflyVue } from "butterfly-vue";
 import LeftPanel from "./LeftPanel.vue";
+import RightPanel from "./RightPanel.vue";
 import PanelRuler from "./ruler/panel-ruler.vue";
 import DragNode from "./drag-node.vue";
 
@@ -84,6 +97,7 @@ export default {
   components: {
     ButterflyVue,
     LeftPanel,
+    RightPanel,
     PanelRuler,
     DragNode,
     FangDa,
@@ -142,7 +156,7 @@ export default {
       newTabIndex: 0,
 
       inputValue: 0,
-      inputValue1: 1,
+      inputValue1: 100,
     };
   },
   methods: {
