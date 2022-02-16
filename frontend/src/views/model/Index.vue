@@ -65,13 +65,7 @@
       <div class="middle-area">
         <PanelRuler>
           <template v-slot:butterfly>
-            <butterfly-vue
-              className="drag"
-              :canvasData="mockData"
-              :canvasConf="canvasConf"
-              @onLoaded="finishLoaded"
-              key="drag"
-            />
+            <Butterfly ref="butterfly"/>
           </template>
         </PanelRuler>
       </div>
@@ -83,11 +77,10 @@
 </template>
 
 <script>
-import { ButterflyVue } from "butterfly-vue";
+import Butterfly from "./butterfly/Butterfly.vue";
+import PanelRuler from "./ruler/panel-ruler.vue";
 import LeftPanel from "./LeftPanel.vue";
 import RightPanel from "./RightPanel.vue";
-import PanelRuler from "./ruler/panel-ruler.vue";
-import DragNode from "./drag-node.vue";
 
 import FangDa from "@/assets/fangda.svg";
 import Suoxiao from "@/assets/suoxiao.svg";
@@ -95,11 +88,10 @@ import Suoxiao from "@/assets/suoxiao.svg";
 export default {
   name: "Drag",
   components: {
-    ButterflyVue,
+    Butterfly,
     LeftPanel,
     RightPanel,
     PanelRuler,
-    DragNode,
     FangDa,
     Suoxiao,
   },
@@ -115,41 +107,6 @@ export default {
     ];
 
     return {
-      canvasConf: {
-        disLinkable: true, // 可删除连线
-        linkable: true, // 可连线
-        draggable: true, // 可拖动
-        zoomable: true, // 可放大
-        moveable: true, // 可平移
-        theme: {
-          edge: {
-            arrow: true,
-            type: "endpoint",
-            shapeType: "Manhattan",
-            arrowPosition: 1,
-            defaultAnimate: true,
-          },
-          endpoint: {
-            position: [], //限制锚点位置['Top', 'Bottom', 'Left', 'Right'],
-            linkableHighlight: true, //连线时会触发point.linkable的方法，可做高亮
-            limitNum: 10, //限制锚点的连接数目
-            expandArea: {
-              //锚点过小时，可扩大连线热区
-              left: 10,
-              right: 10,
-              top: 10,
-              botton: 10,
-            },
-          },
-        },
-      },
-      canvansRef: {},
-      mockData: {
-        nodes: [],
-        groups: [],
-        edges: [],
-      },
-
       // tab分页test
       activeKey: panes[0].key,
       panes,
@@ -160,45 +117,15 @@ export default {
     };
   },
   methods: {
-    guid() {
-      function S4() {
-        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-      }
-      return S4() + S4() + "-" + S4();
-    },
     dragover(e) {
       e.preventDefault();
     },
     addNode(e) {
-      const endpointLeft = {
-        id: "left",
-        orientation: [-1, 0],
-        pos: [0, 0.5],
-      };
-      const endpointRight = {
-        id: "right",
-        orientation: [1, 0],
-        pos: [0, 0.5],
-      };
-      let { clientX, clientY } = e;
-      let coordinates = this.canvansRef.terminal2canvas([clientX, clientY]);
-      let node = JSON.parse(e.dataTransfer.getData("node"));
-      this.mockData.nodes.push({
-        id: this.guid(),
-        left: coordinates[0],
-        top: coordinates[1],
-        render: DragNode,
-        nodeData: node.nodeData,
-        endpoints: [endpointLeft, endpointRight],
-      });
+      this.$refs.butterfly.addNode(e);
     },
-    finishLoaded(VueCom) {
-      this.canvansRef = VueCom.canvas;
-      console.log("finish");
-    },
-
+    
     callback(key) {
-      console.log(key);
+      console.log('cxx::----->' + key);
     },
     onEdit(targetKey, action) {
       this[action](targetKey);

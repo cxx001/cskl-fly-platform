@@ -3,72 +3,27 @@
     <a-collapse>
       <a-collapse-panel key="1" header="基础元件">
         <div
+          v-for="(node, index) in NodeData.base"
+          :key="index"
           draggable
           class="node-container"
           @dragstart="
             (e) => {
-              dragstart(e, node1);
+              dragstart(e, node);
             }
           "
-          ref="node1"
+          :ref="node.ref"
         >
-          <DragNode :itemData="node1" />
-        </div>
-      </a-collapse-panel>
-      <a-collapse-panel key="2" header="姿态动力学元件">
-        <div
-          draggable
-          class="node-container"
-          @dragstart="
-            (e) => {
-              dragstart(e, node2);
-            }
-          "
-          ref="node2"
-        >
-          <DragNode :itemData="node2" />
-        </div>
-      </a-collapse-panel>
-      <a-collapse-panel key="3" header="质心动力学元件">
-        <div
-          draggable
-          class="node-container"
-          @dragstart="
-            (e) => {
-              dragstart(e, node3);
-            }
-          "
-          ref="node3"
-        >
-          <DragNode :itemData="node3" />
-        </div>
-      </a-collapse-panel>
-      <a-collapse-panel key="4" header="动力系统元件">
-        <div
-          draggable
-          class="node-container"
-          @dragstart="
-            (e) => {
-              dragstart(e, node4);
-            }
-          "
-          ref="node4"
-        >
-          <DragNode :itemData="node4" />
-        </div>
-      </a-collapse-panel>
-      <a-collapse-panel key="5" header="坐标转化系统">
-        <div
-          draggable
-          class="node-container"
-          @dragstart="
-            (e) => {
-              dragstart(e, node5);
-            }
-          "
-          ref="node5"
-        >
-          <DragNode :itemData="node5" />
+          <a-popover placement="right">
+            <template slot="content">
+              <p>Content</p>
+              <p>Content</p>
+            </template>
+            <template slot="title">
+              <span>{{node.nodeData.name}}</span>
+            </template>
+            <DragNode :itemData="node" />
+          </a-popover>
         </div>
       </a-collapse-panel>
     </a-collapse>
@@ -76,61 +31,39 @@
 </template>
 
 <script>
-import DragNode from './drag-node.vue';
+import DragNode from "./butterfly/drag-node.vue";
+import NodeData from "./butterfly/node-data.js";
 
 export default {
   components: {
-    DragNode
+    DragNode,
   },
 
-  data(){
-    return{
-      node1: {
-        ref: 'node1',
-        nodeData: {
-          name: 'node1'
-        }
-      },
-      node2: {
-        ref: 'node2',
-        nodeData: {
-          name: 'node2'
-        }
-      },
-      node3: {
-        ref: 'node3',
-        nodeData: {
-          name: 'node3'
-        }
-      },
-      node4: {
-        ref: 'node4',
-        nodeData: {
-          name: 'node4'
-        }
-      },
-      node5: {
-        ref: 'node5',
-        nodeData: {
-          name: 'node5'
-        }
-      },
-    }
+  data() {
+    return {
+      NodeData: NodeData,
+    };
   },
 
-  methods:{
-    dragstart(e,node) {
-      e.dataTransfer.setData('node',JSON.stringify(node));
-      e.dataTransfer.setDragImage(this.$refs[node.ref],30,20);
+  methods: {
+    dragstart(e, node) {
+      let width = this.$refs[node.ref][0].clientWidth;
+      let height = this.$refs[node.ref][0].clientHeight;
+      e.dataTransfer.setData("node", JSON.stringify(node));
+      e.dataTransfer.setDragImage(
+        this.$refs[node.ref][0],
+        width / 2,
+        height / 2
+      );
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
 .node-container {
-  margin: 5px;
-  width: 60px;
+  float: left;
+  margin: 15px;
 }
 
 .model-collapse-panel {
