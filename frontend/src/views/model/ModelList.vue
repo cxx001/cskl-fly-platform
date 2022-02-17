@@ -1,6 +1,6 @@
 <template>
   <div class="model-collapse-panel">
-    <a-collapse>
+    <a-collapse v-model="activeKey">
       <a-collapse-panel key="1" header="基础元件">
         <div
           v-for="(node, index) in NodeData.base"
@@ -41,6 +41,7 @@ export default {
 
   data() {
     return {
+      activeKey: ['1'],
       NodeData: NodeData,
     };
   },

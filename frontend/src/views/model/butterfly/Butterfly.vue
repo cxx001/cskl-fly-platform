@@ -1,5 +1,5 @@
 <template>
-  <div @addNode="addNode">
+  <div>
     <butterfly-vue
       className="drag"
       :canvasData="mockData"
@@ -33,19 +33,21 @@ export default {
             arrow: true,
             type: "endpoint",
             shapeType: "Manhattan",
-            arrowPosition: 1,
-            defaultAnimate: true,
+            arrowPosition: 0.5,
+            defaultAnimate: false,
+            draggable: true,
           },
           endpoint: {
             position: [], //限制锚点位置['Top', 'Bottom', 'Left', 'Right'],
             linkableHighlight: true, //连线时会触发point.linkable的方法，可做高亮
             limitNum: 10, //限制锚点的连接数目
+            isAllowLinkInSameNode: false, //是否允许同一节点中的锚点连接
             expandArea: {
               //锚点过小时，可扩大连线热区
-              left: 10,
-              right: 10,
-              top: 10,
-              botton: 10,
+              left: 1,
+              right: 1,
+              top: 1,
+              botton: 1,
             },
           },
         },
@@ -70,13 +72,13 @@ export default {
       let { clientX, clientY } = e;
       let coordinates = this.canvansRef.terminal2canvas([clientX, clientY]);
       let node = JSON.parse(e.dataTransfer.getData("node"));
+      node.nodeData.endpointEble = true;
       this.mockData.nodes.push({
         id: this.guid(),
         left: coordinates[0],
         top: coordinates[1],
         render: DragNode,
         nodeData: node.nodeData,
-        endpoints: node.nodeData.endpoints,
       });
     },
     finishLoaded(VueCom) {

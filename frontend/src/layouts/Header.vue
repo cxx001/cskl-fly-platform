@@ -19,7 +19,7 @@
       <li>
         <a-tooltip style="width: 20px; height: 20px">
           <template slot="title"> 保存(Ctrl + S) </template>
-          <Baocun />
+          <Baocun @click="saveHandle" />
         </a-tooltip>
       </li>
       <li>
@@ -64,6 +64,12 @@ export default {
     Chexiao,
     Chenzuo,
   },
+
+  methods: {
+    saveHandle() {
+      console.log('123::');
+    }
+  }
 };
 </script>
 
