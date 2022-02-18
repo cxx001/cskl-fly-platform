@@ -1,23 +1,19 @@
-let fs = require('fs');
-
 let utils = {};
 
-utils.saveToJson = function (data, filename) {
+utils.saveMock = function (data) {
   if (!data) {
     console.error('Console.save: No data')
     return;
   }
 
-  if (!filename) filename = 'mockData.json'
-
-  if (typeof data === "object") {
-    let content = JSON.stringify(data);
-    console.log(content);
-    // TODO:访问node环境fs写数据
-    
-  } else {
-    console.warn('Console.save: data is null!');
-  }
-}
+  let content = JSON.stringify(data);
+  console.log('save mockdata:',content);
+  // TODO:访问node环境fs写数据(web环境不支持)
+  // 暂时用html5提供的localStorage, 注意一般浏览器存储上限5M
+  localStorage.setItem('mockData', content);
+  // let get = JSON.parse(localStorage.getItem('mockData'));
+  // localStorage.removeItem('mockData');
+  // get = JSON.parse(localStorage.getItem('mockData'));
+};
 
 export default utils;

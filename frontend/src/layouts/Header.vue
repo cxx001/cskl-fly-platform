@@ -25,7 +25,7 @@
       <li>
         <a-tooltip style="width: 20px; height: 20px">
           <template slot="title"> 更多 </template>
-          <Gengduo />
+          <Gengduo @click="clearHandle" />
         </a-tooltip>
       </li>
       <li>
@@ -94,7 +94,7 @@ export default {
         edge.target = element.targetEndpoint.id;
         mockData.edges.push(edge);
       }
-      utils.saveToJson(mockData);
+      utils.saveMock(mockData);
     },
 
     undoHandle() {
@@ -103,7 +103,12 @@ export default {
 
     redoHandle() {
       this.$store.state.model.canvansRef.redo();
-    }
+    },
+
+    clearHandle() {
+      localStorage.removeItem('mockData');
+      console.log('clear mockdata!');
+    },
   }
 };
 </script>

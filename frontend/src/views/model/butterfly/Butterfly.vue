@@ -13,6 +13,7 @@
 <script>
 import { ButterflyVue } from "butterfly-vue";
 import DragNode from "./drag-node.vue";
+import NodeData from "./node-data";
 
 export default {
   components: {
@@ -52,11 +53,7 @@ export default {
           },
         },
       },
-      mockData: {
-        nodes: [],
-        groups: [],
-        edges: [],
-      },
+      mockData: this.getLocalMockData(),
     };
   },
 
@@ -86,6 +83,47 @@ export default {
     finishLoaded(VueCom) {
       this.$store.dispatch("model/setCanvansRef", VueCom.canvas);
       console.log("finish");
+    },
+
+    getNodeData(uid) {
+      for (const key in NodeData) {
+        const element = NodeData[key];
+        for (let i = 0; i < element.length; i++) {
+          const item = element[i];
+          if (item.nodeData.uid == uid) {
+            return JSON.parse(JSON.stringify(item.nodeData)); // clone
+          }
+        }
+      }
+      return null;
+    },
+
+    getLocalMockData() {
+      let mockData = {
+        nodes: [],
+        groups: [],
+        edges: [],
+      };
+      let lcoalData = JSON.parse(localStorage.getItem("mockData"));
+      if (!lcoalData) {
+        lcoalData = mockData;
+      }
+      for (let i = 0; i < lcoalData.nodes.length; i++) {
+        const element = lcoalData.nodes[i];
+        let nodeData = this.getNodeData(element.uid);
+        nodeData.endpointEble = true;
+        element.render = DragNode;
+        element.nodeData = nodeData;
+        mockData.nodes.push(element);
+      }
+      setTimeout(() => {
+        for (let i = 0; i < lcoalData.edges.length; i++) {
+          const edge = lcoalData.edges[i];
+          this.mockData.edges.push(edge);
+        }
+      });
+
+      return mockData;
     },
   },
 };
