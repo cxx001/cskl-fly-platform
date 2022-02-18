@@ -3,6 +3,7 @@ export default {
     {
       ref: 'output',
       nodeData: {
+        uid: 'base-1',
         name: '初始输出',
         endpoints: [
           {
@@ -41,6 +42,7 @@ export default {
     {
       ref: 'quality',
       nodeData: {
+        uid: 'base-2',
         name: '质量',
         endpoints: [
           {
@@ -85,6 +87,7 @@ export default {
     {
       ref: 'sport',
       nodeData: {
+        uid: 'base-3',
         name: '运动',
         endpoints: [
           {

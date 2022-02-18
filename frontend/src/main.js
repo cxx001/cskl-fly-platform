@@ -2,6 +2,7 @@ import Vue from 'vue'
 import antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less';
 import App from './App'
+import store from './store'
 import router from './router'
 import { VueAxios } from './utils/request'
 import IpcRenderer from '@/utils/ipcRenderer'
@@ -18,6 +19,7 @@ Vue.use(HotKeyInput)
 Vue.config.productionTip = false
 
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')

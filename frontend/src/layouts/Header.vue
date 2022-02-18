@@ -31,13 +31,13 @@
       <li>
         <a-tooltip style="width: 20px; height: 20px">
           <template slot="title"> 撤销(Ctrl + Z) </template>
-          <Chexiao />
+          <Chexiao @click="undoHandle" />
         </a-tooltip>
       </li>
       <li>
         <a-tooltip style="width: 20px; height: 20px">
           <template slot="title"> 重做(Ctrl + Y) </template>
-          <Chenzuo />
+          <Chenzuo @click="redoHandle" />
         </a-tooltip>
       </li>
     </ul>
@@ -54,6 +54,8 @@ import Gengduo from "@/assets/gengduo.svg";
 import Chexiao from "@/assets/chexiao.svg";
 import Chenzuo from "@/assets/chenzuo.svg";
 
+import utils from "../utils/utils"
+
 export default {
   components: {
     Icon,
@@ -67,7 +69,40 @@ export default {
 
   methods: {
     saveHandle() {
-      console.log('123::');
+      let mockData = {
+        nodes: [],
+        edges: [],
+      };
+      let data = this.$store.state.model.canvansRef.getDataMap();
+      console.log('画板数据:', data);
+      for (let i = 0; i < data.nodes.length; i++) {
+        const element = data.nodes[i];
+        let node = {};
+        node.id = element.id;
+        node.uid = element.options.nodeData.uid;
+        node.top = element.top;
+        node.left = element.left;
+        mockData.nodes.push(node);
+      }
+      for (let i = 0; i < data.edges.length; i++) {
+        const element = data.edges[i];
+        let edge = {};
+        edge.id = element.id;
+        edge.sourceNode = element.sourceNode.id;
+        edge.targetNode = element.targetNode.id;
+        edge.source = element.sourceEndpoint.id;
+        edge.target = element.targetEndpoint.id;
+        mockData.edges.push(edge);
+      }
+      utils.saveToJson(mockData);
+    },
+
+    undoHandle() {
+      this.$store.state.model.canvansRef.undo();
+    },
+
+    redoHandle() {
+      this.$store.state.model.canvansRef.redo();
     }
   }
 };

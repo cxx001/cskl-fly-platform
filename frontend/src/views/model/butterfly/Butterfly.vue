@@ -52,7 +52,6 @@ export default {
           },
         },
       },
-      canvansRef: {},
       mockData: {
         nodes: [],
         groups: [],
@@ -70,7 +69,10 @@ export default {
     },
     addNode(e) {
       let { clientX, clientY } = e;
-      let coordinates = this.canvansRef.terminal2canvas([clientX, clientY]);
+      let coordinates = this.$store.state.model.canvansRef.terminal2canvas([
+        clientX,
+        clientY,
+      ]);
       let node = JSON.parse(e.dataTransfer.getData("node"));
       node.nodeData.endpointEble = true;
       this.mockData.nodes.push({
@@ -82,7 +84,7 @@ export default {
       });
     },
     finishLoaded(VueCom) {
-      this.canvansRef = VueCom.canvas;
+      this.$store.dispatch("model/setCanvansRef", VueCom.canvas);
       console.log("finish");
     },
   },
