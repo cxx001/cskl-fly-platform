@@ -286,6 +286,14 @@ class ExampleController extends BaseController {
 
     this.sendSuccess(data);
   }
+
+  async json2xml() {
+    const { ctx, service } = this;
+    const body = ctx.request.body;
+    const data = {};
+    await service.example.json2xml(body);
+    this.sendSuccess(data);
+  }
 }
 
 module.exports = ExampleController;

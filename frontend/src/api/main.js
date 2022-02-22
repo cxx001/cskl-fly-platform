@@ -15,6 +15,8 @@ const mainApi = {
   messageShowConfirm: '/api/v1/example/messageShowConfirm',
   dbOperation: '/api/v1/example/dbOperation',
   testElectronApi: '/api/v1/example/testElectronApi',
+
+  json2xml: '/api/v1/example/json2xml',
 }
 
 /**

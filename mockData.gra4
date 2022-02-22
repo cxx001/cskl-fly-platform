@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Model>
+  <UnitGroup Count="4">
+    <Unit id="0" mid="5402" identifier="22811" GroupId="-1">
+      <Title name="初始输出" fontname="" fontsize="15" weight="400"/>
+      <UserFct Dllfile="Model/libDemo.so" Fctname="InitFunction"/>
+    </Unit>
+  </UnitGroup>
+  <LineGroup/>
+  <Simucfg/>
+</Model>

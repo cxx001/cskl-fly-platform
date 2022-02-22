@@ -1,6 +1,8 @@
 'use strict';
 
 const BaseService = require('./base');
+const xml2js = require('xml2js');
+const fse = require('fs-extra');
 
 class ExampleService extends BaseService {
   async openLocalDir(dir) {
@@ -80,7 +82,7 @@ class ExampleService extends BaseService {
 
   async openSoftware(softName) {
     const callResult = await this.ipcCall('example.openSoftware', softName);
-    
+
     return callResult.data;
   }
 
@@ -103,19 +105,32 @@ class ExampleService extends BaseService {
     await this.ipcCall('example.messageShow');
 
     return true;
-  } 
+  }
 
   async messageShowConfirm() {
     await this.ipcCall('example.messageShowConfirm');
 
     return true;
-  }   
+  }
 
   async loadExtension(filePath) {
     const self = this;
 
     await self.ipcCall('example.loadExtension', filePath);
 
+    return true;
+  }
+
+  async json2xml(json) {
+    var builder = new xml2js.Builder();
+    var xml = builder.buildObject(json);
+    fse.writeFile('./mockData.gra4', xml, function (error) {
+      if (error) {
+        console.log('write file error!');
+      } else {
+        console.log('write file success.');
+      }
+    })
     return true;
   }
 }

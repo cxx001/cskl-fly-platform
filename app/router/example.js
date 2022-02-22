@@ -43,4 +43,6 @@ module.exports = app => {
   router.post('/api/v1/example/uploadExtension', controller.v1.example.uploadExtension);
   // db operation
   router.post('/api/v1/example/dbOperation', controller.v1.example.dbOperation);
+  // json to xml
+  router.post('/api/v1/example/json2xml', controller.v1.example.json2xml);
 };
