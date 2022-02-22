@@ -9,7 +9,6 @@ const mainApi = {
   autoLaunchEnable: '/api/v1/example/autoLaunchEnable',
   autoLaunchDisable: '/api/v1/example/autoLaunchDisable',
   autoLaunchIsEnabled: '/api/v1/example/autoLaunchIsEnabled',
-  openSoftware: '/api/v1/example/openSoftware',
   selectFileDir: '/api/v1/example/selectFileDir',
   messageShow: '/api/v1/example/messageShow',
   messageShowConfirm: '/api/v1/example/messageShowConfirm',
@@ -17,6 +16,7 @@ const mainApi = {
   testElectronApi: '/api/v1/example/testElectronApi',
 
   json2xml: '/api/v1/example/json2xml',
+  openSoftware: '/api/v1/example/openSoftware',
 }
 
 /**

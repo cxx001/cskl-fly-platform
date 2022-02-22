@@ -5,7 +5,7 @@
         <Icon style="width: 25px; height: 25px" />
       </li>
       <li>
-        <a-tooltip style="width: 20px; height: 20px;">
+        <a-tooltip style="width: 20px; height: 20px">
           <template slot="title"> 新建(Ctrl + N) </template>
           <XinJian />
         </a-tooltip>
@@ -40,6 +40,12 @@
           <Chenzuo @click="redoHandle" />
         </a-tooltip>
       </li>
+      <li>
+        <a-tooltip style="width: 20px; height: 20px">
+          <template slot="title"> 运行 </template>
+          <Run @click="runHandle" />
+        </a-tooltip>
+      </li>
     </ul>
     <b>飞行仿真项目</b>
   </div>
@@ -53,8 +59,10 @@ import Baocun from "@/assets/baocun.svg";
 import Gengduo from "@/assets/gengduo.svg";
 import Chexiao from "@/assets/chexiao.svg";
 import Chenzuo from "@/assets/chenzuo.svg";
+import Run from "@/assets/run.svg";
 
-import utils from "../utils/utils"
+import utils from "../utils/utils";
+import { localApi } from "@/api/main";
 
 export default {
   components: {
@@ -65,6 +73,7 @@ export default {
     Gengduo,
     Chexiao,
     Chenzuo,
+    Run,
   },
 
   methods: {
@@ -97,7 +106,7 @@ export default {
         mockData.edges.push(edge);
       }
       utils.saveMock(mockData);
-      console.log('保存浏览器缓存数据:', mockData);
+      console.log("保存浏览器缓存数据:", mockData);
     },
 
     undoHandle() {
@@ -109,10 +118,27 @@ export default {
     },
 
     clearHandle() {
-      localStorage.removeItem('mockData');
-      console.log('clear mockdata!');
+      localStorage.removeItem("mockData");
+      console.log("clear mockdata!");
     },
-  }
+
+    runHandle() {
+      const key = 'updatable';
+      localApi("openSoftware", {})
+        .then((res) => {
+          if (res.code !== 0) {
+            return false;
+          }
+          this.$message.loading({ content: "引擎运行中...", key });
+          setTimeout(() => {
+            this.$message.success({ content: "运行成功!", key, duration: 2 });
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
 };
 </script>
 

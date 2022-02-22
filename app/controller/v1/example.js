@@ -242,9 +242,10 @@ class ExampleController extends BaseController {
   async openSoftware() {
     const { service } = this;
     const data = {};
-    const openResult = await service.example.openSoftware('powershell.exe');
+    const openResult = await service.example.openSoftware();
     if (!openResult) {
       this.sendFail({}, '程序不存在', 100);
+      console.log('程序不存在!');
       return;
     }
     this.sendSuccess(data);

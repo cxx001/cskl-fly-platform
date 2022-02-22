@@ -3,6 +3,7 @@
 const BaseService = require('./base');
 const xml2js = require('xml2js');
 const fse = require('fs-extra');
+const { exec } = require('child_process');
 
 class ExampleService extends BaseService {
   async openLocalDir(dir) {
@@ -80,10 +81,21 @@ class ExampleService extends BaseService {
     return callResult.data;
   }
 
-  async openSoftware(softName) {
-    const callResult = await this.ipcCall('example.openSoftware', softName);
+  async openSoftware() {
+    let softwarePath = 'C:/Users/Admin/Desktop/test/electron-egg-master/out/win-unpacked/electron-egg.exe';
 
-    return callResult.data;
+    // 检查程序是否存在
+    if (!fse.existsSync(softwarePath)) {
+      return false;
+    }
+
+    // 命令行字符串 并 执行
+    let cmdStr = 'start ' + softwarePath + ' ../../mockData.gra4';
+    exec(cmdStr, (err, stdout, stderr) => {
+      console.log(err, stdout, stderr)
+    });
+
+    return true;
   }
 
   async selectDir() {
