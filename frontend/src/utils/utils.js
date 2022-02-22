@@ -2,17 +2,98 @@ let utils = {};
 
 import { localApi } from '@/api/main';
 
+function getNodeIdx(nodes, id) {
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
+    if (node.id == id) {
+      return i;
+    }
+  }
+  return null;
+}
+
+function linesGroup(edges) {
+  let tempArr = [];
+  var newArr = [];
+  edges.forEach((i, index) => {
+    let key = i.sourceNode + '_' + i.targetNode;
+    if (tempArr.indexOf(key) === -1) {
+      newArr.push({
+        key: key,
+        datas: [i]
+      });
+      tempArr.push(key);
+    } else {
+      newArr[tempArr.indexOf(key)].datas.push(i);
+    }
+  });
+  return newArr;
+}
+
 // test gra4
 function dataFormat(data) {
+  // 排序
+  let nodes = data.nodes;
+  nodes.sort(function (a, b) {
+    return a.index - b.index;
+  });
+
   let tempData = {};
   tempData.Model = {};
-  tempData.Model.UnitGroup = { '$': { Count: '4' }};
-  tempData.Model.UnitGroup.Unit = {'$': {id: "0", mid: "5402", identifier: "22811", GroupId: "-1"}};
-  tempData.Model.UnitGroup.Unit.Title = {'$': {name: "初始输出", fontname: "", fontsize: "15", weight: "400"}};
-  tempData.Model.UnitGroup.Unit.UserFct = {'$': {Dllfile: "Model/libDemo.so", Fctname: "InitFunction"}};
+  let nodeCount = nodes.length;
+  tempData.Model.UnitGroup = { '$': { Count: nodeCount }, Unit: [] };
+  for (let i = 0; i < nodes.length; i++) {
+    const item = nodes[i];
+    let unit = {
+      '$': { id: i, mid: "5402", identifier: "22811", GroupId: "-1" },
+      'Title': { '$': { name: item.name, fontname: "", fontsize: "15", weight: "400" } },
+      'UserFct': { '$': { Dllfile: item.dllFile, Fctname: item.fctName } }
+    };
+    tempData.Model.UnitGroup.Unit.push(unit);
+  }
 
-  tempData.Model.LineGroup = {};
-  tempData.Model.Simucfg = {};
+  let groups = linesGroup(data.edges);
+  let lineCount = groups.length;
+  tempData.Model.LineGroup = { '$': { Count: lineCount }, Line: [] };
+  for (let i = 0; i < lineCount; i++) {
+    let line = {'$': { id: i }};
+    const group  = groups[i].datas;
+    for (let j = 0; j < group.length; j++) {
+      const edge = group[j];
+      if (j == 0) {
+        line.Data = {
+          '$': {
+            in: getNodeIdx(nodes, edge.sourceNode),
+            out: getNodeIdx(nodes, edge.targetNode),
+            inport: edge.source.split('-')[1],
+            export: edge.target.split('-')[1],
+            dim: '1'
+          }
+        }
+        if (group.length > 1) {
+          line.SubLine = {'$': {Count: group.length-1}};
+        }
+      } else {
+        let flag = 'line' + (j - 1);
+        line.SubLine[flag] = {
+          '$': {
+            in: getNodeIdx(nodes, edge.sourceNode),
+            out: getNodeIdx(nodes, edge.targetNode),
+            inport: edge.source.split('-')[1],
+            export: edge.target.split('-')[1],
+            dim: '1'
+          }
+        }
+      }
+    }
+    tempData.Model.LineGroup.Line.push(line);
+  }
+
+  tempData.Model.Simucfg = {
+    '$': { bInherit: '0' },
+    Simu: { '$': { SimuType: "0", Method: "4", Interp: "2", MonteCalo: "0", StartTime: "0", EndTime: "100" } },
+    Step: { '$': { bBigStep: "0", MinStep: "0.001", MaxStep: "0.1", NormStep: "0.01" } }
+  };
   return tempData;
 }
 
@@ -23,7 +104,6 @@ utils.saveMock = function (data) {
   }
 
   let content = JSON.stringify(data);
-  console.log('save mockdata:',content);
   // TODO:访问node环境fs写数据(web环境不支持)
   // 暂时用html5提供的localStorage, 注意一般浏览器存储上限5M
   localStorage.setItem('mockData', content);

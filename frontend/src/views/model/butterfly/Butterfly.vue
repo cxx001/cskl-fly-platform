@@ -85,12 +85,12 @@ export default {
       console.log("finish");
     },
 
-    getNodeData(uid) {
+    getNodeData(index) {
       for (const key in NodeData) {
         const element = NodeData[key];
         for (let i = 0; i < element.length; i++) {
           const item = element[i];
-          if (item.nodeData.uid == uid) {
+          if (item.nodeData.index == index) {
             return JSON.parse(JSON.stringify(item.nodeData)); // clone
           }
         }
@@ -110,7 +110,7 @@ export default {
       }
       for (let i = 0; i < lcoalData.nodes.length; i++) {
         const element = lcoalData.nodes[i];
-        let nodeData = this.getNodeData(element.uid);
+        let nodeData = this.getNodeData(element.index);
         nodeData.endpointEble = true;
         element.render = DragNode;
         element.nodeData = nodeData;

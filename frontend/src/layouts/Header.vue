@@ -74,14 +74,16 @@ export default {
         edges: [],
       };
       let data = this.$store.state.model.canvansRef.getDataMap();
-      console.log('画板数据:', data);
       for (let i = 0; i < data.nodes.length; i++) {
         const element = data.nodes[i];
         let node = {};
         node.id = element.id;
-        node.uid = element.options.nodeData.uid;
+        node.index = element.options.nodeData.index;
         node.top = element.top;
         node.left = element.left;
+        node.name = element.options.nodeData.name;
+        node.dllFile = element.options.nodeData.dllFile;
+        node.fctName = element.options.nodeData.fctName;
         mockData.nodes.push(node);
       }
       for (let i = 0; i < data.edges.length; i++) {
@@ -95,6 +97,7 @@ export default {
         mockData.edges.push(edge);
       }
       utils.saveMock(mockData);
+      console.log('保存浏览器缓存数据:', mockData);
     },
 
     undoHandle() {

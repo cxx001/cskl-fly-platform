@@ -2,10 +2,10 @@
   <div>
     <a-tooltip style="width: 10px; height: 10px">
       <template slot="title"> {{ param.endpoint.des }} </template>
-      <div :id="'bf_endpoint_' + id" :class="className">
+      <div :id="id" :class="className">
         <slot>
           <div>
-            <p style="font-size: xx-small; line-height: 5px">{{id}}</p>
+            <p style="font-size: xx-small; line-height: 5px">{{id.split('-')[1]}}</p>
           </div>
         </slot>
       </div>
@@ -57,9 +57,9 @@ export default {
       "$options.propsData.canvasNode",
       false
     );
-    if (canvasNode && !canvasNode.getEndpoint("bf_endpoint_" + this.id)) {
+    if (canvasNode && !canvasNode.getEndpoint(this.id)) {
       canvasNode.addEndpoint({
-        id: "bf_endpoint_" + this.id,
+        id: this.id,
         dom: this.$el,
         ...this.param,
       });
@@ -67,8 +67,8 @@ export default {
   },
   beforeDestroy() {
     let butterflyParent = this.findParent(this);
-    if (butterflyParent.canvasNode.getEndpoint("bf_endpoint_" + this.id)) {
-      butterflyParent.canvasNode.removeEndpoint("bf_endpoint_" + this.id);
+    if (butterflyParent.canvasNode.getEndpoint(this.id)) {
+      butterflyParent.canvasNode.removeEndpoint(this.id);
     }
   },
 };

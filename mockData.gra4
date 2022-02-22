@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Model>
-  <UnitGroup Count="4">
+  <UnitGroup Count="3">
     <Unit id="0" mid="5402" identifier="22811" GroupId="-1">
       <Title name="初始输出" fontname="" fontsize="15" weight="400"/>
       <UserFct Dllfile="Model/libDemo.so" Fctname="InitFunction"/>
     </Unit>
+    <Unit id="1" mid="5402" identifier="22811" GroupId="-1">
+      <Title name="质量" fontname="" fontsize="15" weight="400"/>
+      <UserFct Dllfile="Model/libDemo.so" Fctname="demoFunction"/>
+    </Unit>
+    <Unit id="2" mid="5402" identifier="22811" GroupId="-1">
+      <Title name="运动" fontname="" fontsize="15" weight="400"/>
+      <UserFct Dllfile="Model/libDemo.so" Fctname="movementFunction"/>
+    </Unit>
   </UnitGroup>
-  <LineGroup/>
-  <Simucfg/>
+  <LineGroup Count="2">
+    <Line id="0">
+      <Data in="0" out="1" inport="0" export="0" dim="1"/>
+      <SubLine Count="2">
+        <line0 in="0" out="1" inport="2" export="1" dim="1"/>
+        <line1 in="0" out="1" inport="3" export="2" dim="1"/>
+      </SubLine>
+    </Line>
+    <Line id="1">
+      <Data in="1" out="2" inport="0" export="0" dim="1"/>
+    </Line>
+  </LineGroup>
+  <Simucfg bInherit="0">
+    <Simu SimuType="0" Method="4" Interp="2" MonteCalo="0" StartTime="0" EndTime="100"/>
+    <Step bBigStep="0" MinStep="0.001" MaxStep="0.1" NormStep="0.01"/>
+  </Simucfg>
 </Model>
