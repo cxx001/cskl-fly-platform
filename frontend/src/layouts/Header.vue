@@ -93,6 +93,13 @@ export default {
         node.name = element.options.nodeData.name;
         node.dllFile = element.options.nodeData.dllFile;
         node.fctName = element.options.nodeData.fctName;
+
+        // TODO: 临时测试使用
+        let attrForm = this.$store.state.model.attrForm[node.index] || {};
+        if (attrForm.entityId == '1') {
+          node.dllFile = "Model/RAdd.so";
+        }
+
         mockData.nodes.push(node);
       }
       for (let i = 0; i < data.edges.length; i++) {
@@ -132,6 +139,7 @@ export default {
           this.$message.loading({ content: "引擎运行中...", key });
           setTimeout(() => {
             this.$message.success({ content: "运行成功!", key, duration: 2 });
+            this.saveHandle();
           }, 2000);
         })
         .catch((err) => {

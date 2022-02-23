@@ -133,6 +133,29 @@ export default {
             des: '位置(m)-2',
           }
         ],
+      },
+    },
+    {
+      ref: 'add',
+      nodeData: {
+        name: '加法器',
+        index: 3,
+        dllFile: 'Model/DAdd.so',
+        fctName: 'demoFunction',
+        endpoints: [
+          {
+            id: "in-0",
+            orientation: [-1, 0],
+            pos: [0, 0.5],
+            des: '0-输入',
+          },
+          {
+            id: "out-0",
+            orientation: [1, 0],
+            pos: [0, 0.5],
+            des: '输出-0',
+          }
+        ],
       }
     }
   ],

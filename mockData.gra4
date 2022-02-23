@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Model>
-  <UnitGroup Count="3">
+  <UnitGroup Count="5">
     <Unit id="0" mid="5402" identifier="22811" GroupId="-1">
       <Title name="初始输出" fontname="" fontsize="15" weight="400"/>
       <UserFct Dllfile="Model/libDemo.so" Fctname="InitFunction"/>
@@ -10,20 +10,39 @@
       <UserFct Dllfile="Model/libDemo.so" Fctname="demoFunction"/>
     </Unit>
     <Unit id="2" mid="5402" identifier="22811" GroupId="-1">
+      <Title name="质量" fontname="" fontsize="15" weight="400"/>
+      <UserFct Dllfile="Model/libDemo.so" Fctname="demoFunction"/>
+    </Unit>
+    <Unit id="3" mid="5402" identifier="22811" GroupId="-1">
       <Title name="运动" fontname="" fontsize="15" weight="400"/>
       <UserFct Dllfile="Model/libDemo.so" Fctname="movementFunction"/>
     </Unit>
+    <Unit id="4" mid="5402" identifier="22811" GroupId="-1">
+      <Title name="加法器" fontname="" fontsize="15" weight="400"/>
+      <UserFct Dllfile="Model/DAdd.so" Fctname="demoFunction"/>
+    </Unit>
   </UnitGroup>
-  <LineGroup Count="2">
+  <LineGroup Count="5">
     <Line id="0">
       <Data in="0" out="1" inport="0" export="0" dim="1"/>
-      <SubLine Count="2">
-        <line0 in="0" out="1" inport="2" export="1" dim="1"/>
-        <line1 in="0" out="1" inport="3" export="2" dim="1"/>
+      <SubLine Count="1">
+        <line0 in="0" out="1" inport="1" export="1" dim="1"/>
       </SubLine>
     </Line>
     <Line id="1">
-      <Data in="1" out="2" inport="0" export="0" dim="1"/>
+      <Data in="1" out="3" inport="1" export="1" dim="1"/>
+      <SubLine Count="1">
+        <line0 in="1" out="3" inport="2" export="2" dim="1"/>
+      </SubLine>
+    </Line>
+    <Line id="2">
+      <Data in="2" out="3" inport="0" export="1" dim="1"/>
+    </Line>
+    <Line id="3">
+      <Data in="4" out="2" inport="0" export="0" dim="1"/>
+    </Line>
+    <Line id="4">
+      <Data in="0" out="4" inport="3" export="0" dim="1"/>
     </Line>
   </LineGroup>
   <Simucfg bInherit="0">

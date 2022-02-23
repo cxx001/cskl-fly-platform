@@ -84,8 +84,15 @@ export default {
       this.$store.dispatch("model/setCanvansRef", VueCom.canvas);
       console.log("finish");
 
-      VueCom.canvas.on('system.node.click', function (data) {
+      VueCom.canvas.on('system.node.click', (data) => {
         console.log('点击节点:', data);
+        let form = {
+          id: data.node.options.nodeData.index,
+          name: data.node.options.nodeData.name,
+          isEntity: data.node.options.nodeData.index == 3
+        }
+        this.$store.dispatch("model/setAttrForm", {key: 'default', form: form});
+        this.$store.dispatch("model/setAttrForm", {key: data.node.options.nodeData.index, form: form});
       })
     },
 
