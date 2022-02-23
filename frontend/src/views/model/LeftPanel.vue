@@ -10,30 +10,34 @@
         </a-radio-button>
       </a-radio-group>
       <a-input-search class="topSearch" placeholder="搜索" style="width: 98%; margin-top:5px" @search="onSearch" />
-      <router-view />
+      <div v-if="pageView == 1">
+        <ModelList />
+      </div>
+      <div v-else>
+        <ModelTree />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import ModelList from "./ModelList.vue"
+import ModelTree from "./ModelTree.vue"
+
 export default {
   components: {
+    ModelList,
+    ModelTree
   },
   data() {
     return {
+      pageView: 1,
     }
-  },
-  mounted () {
-    this.$router.push({ name: "ModelList", params: {}});
   },
   methods:{
     onChange(e) {
       console.log(`checked = ${e.target.value}`);
-      if (e.target.value == 1) {
-        this.$router.push({ name: "ModelList", params: {}});
-      } else {
-        this.$router.push({ name: "ModelTree", params: {}});
-      }
+      this.pageView = e.target.value;
     },
 
     onSearch(value) {

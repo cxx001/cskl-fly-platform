@@ -83,6 +83,10 @@ export default {
     finishLoaded(VueCom) {
       this.$store.dispatch("model/setCanvansRef", VueCom.canvas);
       console.log("finish");
+
+      VueCom.canvas.on('system.node.click', function (data) {
+        console.log('点击节点:', data);
+      })
     },
 
     getNodeData(index) {

@@ -58,19 +58,7 @@ export const constantRouterMap = [
       {
         path: "/model/index",
         name: "ModelIndex",
-        component: () => import("@/views/model/Index"),
-        children: [
-          {
-            path: "/model/ModelList",
-            name: "ModelList",
-            component: () => import("@/views/model/ModelList")
-          },
-          {
-            path: "/model/ModelTree",
-            name: "ModelTree",
-            component: () => import("@/views/model/ModelTree")
-          }
-        ]
+        component: () => import("@/views/model/Index")
       },
       {
         path: "/simulation/index",

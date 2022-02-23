@@ -10,18 +10,27 @@
         </a-radio-button>
       </a-radio-group>
     </div>
-    <div style="margin-top: 200px">
-        属性面板
+    <div v-if="pageView == 1">
+      <ModelAttribute />
+    </div>
+    <div v-else>
+      <ModelStyle />
     </div>
   </div>
 </template>
 
 <script>
+import ModelAttribute from "./ModelAttribute.vue"
+import ModelStyle from "./ModelStyle.vue"
+
 export default {
   components: {
+    ModelAttribute,
+    ModelStyle,
   },
   data() {
     return {
+      pageView: 1
     }
   },
   mounted () {
@@ -29,6 +38,7 @@ export default {
   methods:{
     onChange(e) {
       console.log(`checked = ${e.target.value}`);
+      this.pageView = e.target.value;
     },
   }
 };
