@@ -48,6 +48,11 @@
       </li>
     </ul>
     <b>飞行仿真项目</b>
+    <div>
+      <a-modal v-model="visible" title="仿真结果" :footer="null">
+        <p> {{content}} </p>
+      </a-modal>
+    </div>
   </div>
 </template>
 
@@ -76,6 +81,13 @@ export default {
     Run,
   },
 
+  data() {
+    return {
+      visible: false,
+      content: "test...",
+    };
+  },
+
   methods: {
     async saveHandle() {
       let mockData = {
@@ -96,7 +108,7 @@ export default {
 
         // TODO: 临时测试使用
         let attrForm = this.$store.state.model.attrForm[node.index] || {};
-        if (attrForm.entityId == '1') {
+        if (attrForm.entityId == "1") {
           node.dllFile = "Model/RAdd.so";
         }
 
@@ -131,7 +143,7 @@ export default {
 
     async runHandle() {
       await this.saveHandle();
-      const key = 'updatable';
+      const key = "updatable";
       localApi("openSoftware", {})
         .then((res) => {
           if (res.code !== 0) {
@@ -140,6 +152,7 @@ export default {
           this.$message.loading({ content: "引擎运行中...", key });
           setTimeout(() => {
             this.$message.success({ content: "运行成功!", key, duration: 2 });
+            this.visible = true;
           }, 2000);
         })
         .catch((err) => {
