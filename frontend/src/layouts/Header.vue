@@ -77,7 +77,7 @@ export default {
   },
 
   methods: {
-    saveHandle() {
+    async saveHandle() {
       let mockData = {
         nodes: [],
         edges: [],
@@ -129,7 +129,8 @@ export default {
       console.log("clear mockdata!");
     },
 
-    runHandle() {
+    async runHandle() {
+      await this.saveHandle();
       const key = 'updatable';
       localApi("openSoftware", {})
         .then((res) => {
@@ -139,7 +140,6 @@ export default {
           this.$message.loading({ content: "引擎运行中...", key });
           setTimeout(() => {
             this.$message.success({ content: "运行成功!", key, duration: 2 });
-            this.saveHandle();
           }, 2000);
         })
         .catch((err) => {
