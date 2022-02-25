@@ -245,7 +245,6 @@ class ExampleController extends BaseController {
     const openResult = await service.example.openSoftware();
     if (!openResult) {
       this.sendFail({}, '程序不存在', 100);
-      console.log('程序不存在!');
       return;
     }
     this.sendSuccess(data);
@@ -294,6 +293,17 @@ class ExampleController extends BaseController {
     const data = {};
     await service.example.json2xml(body);
     this.sendSuccess(data);
+  }
+
+  async sendMsgToEngine() {
+    const { ctx, service } = this;
+    const body = ctx.request.body;
+    let command = body.command;
+    let parameter = body.parameter;
+    await service.example.sendMsgToEngine(command, parameter, (ret) => {
+      this.sendSuccess(ret);
+    });
+    // this.sendSuccess({});
   }
 }
 

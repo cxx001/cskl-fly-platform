@@ -1,7 +1,5 @@
 let utils = {};
 
-import { localApi } from '@/api/main';
-
 function getNodeIdx(nodes, id) {
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
@@ -31,7 +29,12 @@ function linesGroup(edges) {
 }
 
 // test gra4
-function dataFormat(data) {
+utils.dataFormat = function (data) {
+  if (!data) {
+    console.error('data format error!');
+    return;
+  }
+
   // 排序
   let nodes = data.nodes;
   nodes.sort(function (a, b) {
@@ -91,7 +94,7 @@ function dataFormat(data) {
 
   tempData.Model.Simucfg = {
     '$': { bInherit: '0' },
-    Simu: { '$': { SimuType: "0", Method: "4", Interp: "2", MonteCalo: "0", StartTime: "0", EndTime: "100" } },
+    Simu: { '$': { SimuType: "0", Method: "4", Interp: "2", MonteCalo: "0", StartTime: "0", EndTime: "0.05" } },
     Step: { '$': { bBigStep: "0", MinStep: "0.001", MaxStep: "0.1", NormStep: "0.01" } }
   };
   return tempData;
@@ -110,17 +113,6 @@ utils.saveMock = function (data) {
   // let get = JSON.parse(localStorage.getItem('mockData'));
   // localStorage.removeItem('mockData');
   // get = JSON.parse(localStorage.getItem('mockData'));
-
-  // json2xml to local 
-  let formatData = dataFormat(data);
-  localApi('json2xml', formatData).then(res => {
-    if (res.code !== 0) {
-      return false
-    }
-    console.log('res:', res)
-  }).catch(err => {
-    console.error(err);
-  })
 };
 
 export default utils;

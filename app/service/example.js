@@ -5,6 +5,8 @@ const xml2js = require('xml2js');
 const fse = require('fs-extra');
 const { exec } = require('child_process');
 
+var latest_xml = '';
+
 class ExampleService extends BaseService {
   async openLocalDir(dir) {
     const self = this;
@@ -134,16 +136,47 @@ class ExampleService extends BaseService {
   }
 
   async json2xml(json) {
+    if (!json) {
+      console.error('json data null!');
+      return false;
+    }
+
     var builder = new xml2js.Builder();
-    var xml = builder.buildObject(json);
-    fse.writeFile('./mockData.gra4', xml, function (error) {
-      if (error) {
-        console.log('write file error!');
-      } else {
-        console.log('write file success.');
-      }
-    })
+    latest_xml = builder.buildObject(json);
+    console.log('xml update success.');
+    // TODO: 当前做法是启动时直接传最新的xml对象给引擎, 因此前端不需要持久化保存。如果确定这种做法，这里还可以优化，不需要到egg这边，直接在vue端完成。
+    // fse.writeFile('./mockData.gra4', latest_xml, function (error) {
+    //   if (error) {
+    //     console.log('write file error!');
+    //   } else {
+    //     console.log('write file success.');
+    //   }
+    // })
     return true;
+  }
+
+  async sendMsgToEngine(command, data, cb) {
+    let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == xhr.DONE) {
+        if (xhr.status == 200) {
+          cb(xhr.responseText);
+        } else { 
+          console.log('send msg fail, status=', xhr.status);
+          cb(xhr.status);
+        }
+      }
+    }
+
+    let url = 'http://192.168.10.251:9988/' + command;
+    if (command == 'start') {
+      data = latest_xml;
+    }
+    xhr.open('POST', url);
+    xhr.send(data);
+    console.log('send msg command: ', command);
+    console.log('send msg data: ', data);
   }
 }
 

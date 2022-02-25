@@ -45,4 +45,6 @@ module.exports = app => {
   router.post('/api/v1/example/dbOperation', controller.v1.example.dbOperation);
   // json to xml
   router.post('/api/v1/example/json2xml', controller.v1.example.json2xml);
+  // send msg to engine
+  router.post('/api/v1/example/sendMsgToEngine', controller.v1.example.sendMsgToEngine);
 };

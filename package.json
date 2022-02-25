@@ -124,6 +124,7 @@
     "socket.io": "^3.0.5",
     "socket.io-client": "^3.0.5",
     "unzip-crx-3": "^0.2.0",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "xmlhttprequest": "^1.8.0"
   }
 }

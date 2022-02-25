@@ -15,8 +15,9 @@ const mainApi = {
   dbOperation: '/api/v1/example/dbOperation',
   testElectronApi: '/api/v1/example/testElectronApi',
 
-  json2xml: '/api/v1/example/json2xml',
   openSoftware: '/api/v1/example/openSoftware',
+  json2xml: '/api/v1/example/json2xml',
+  sendMsgToEngine: '/api/v1/example/sendMsgToEngine',
 }
 
 /**

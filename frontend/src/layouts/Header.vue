@@ -50,7 +50,7 @@
     <b>飞行仿真项目</b>
     <div>
       <a-modal v-model="visible" title="仿真结果" :footer="null">
-        <p> {{content}} </p>
+        <p>{{ content }}</p>
       </a-modal>
     </div>
   </div>
@@ -66,7 +66,7 @@ import Chexiao from "@/assets/chexiao.svg";
 import Chenzuo from "@/assets/chenzuo.svg";
 import Run from "@/assets/run.svg";
 
-import utils from "../utils/utils";
+import utils from "@/utils/utils";
 import { localApi } from "@/api/main";
 
 export default {
@@ -89,7 +89,7 @@ export default {
   },
 
   methods: {
-    async saveHandle() {
+    saveHandle() {
       let mockData = {
         nodes: [],
         edges: [],
@@ -109,7 +109,7 @@ export default {
         // TODO: 临时测试使用
         let attrForm = this.$store.state.model.attrForm[node.index] || {};
         if (attrForm.entityId == "1") {
-          node.dllFile = "Model/RAdd.so";
+          node.dllFile = "Model/libradd.so";
         }
 
         mockData.nodes.push(node);
@@ -126,6 +126,7 @@ export default {
       }
       utils.saveMock(mockData);
       console.log("保存浏览器缓存数据:", mockData);
+      return mockData;
     },
 
     undoHandle() {
@@ -141,19 +142,34 @@ export default {
       console.log("clear mockdata!");
     },
 
-    async runHandle() {
-      await this.saveHandle();
-      const key = "updatable";
-      localApi("openSoftware", {})
+    runHandle() {
+      // json2xml
+      let mockData = this.saveHandle();
+      let formatData = utils.dataFormat(mockData);
+      localApi("json2xml", formatData)
         .then((res) => {
           if (res.code !== 0) {
             return false;
           }
-          this.$message.loading({ content: "引擎运行中...", key });
-          setTimeout(() => {
-            this.$message.success({ content: "运行成功!", key, duration: 2 });
-            this.visible = true;
-          }, 2000);
+          console.log("json2xml:", res);
+          const hide = this.$message.loading('引擎运行中..', 0);
+          let data = {
+            command: 'start',
+            parameter: null
+          }
+          localApi("sendMsgToEngine", data)
+            .then((ret) => {
+              if (ret.code !== 0) {
+                return false;
+              }
+              setTimeout(hide);
+              this.visible = true;
+              this.content = ret.data;
+              console.log('engine:', ret);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
         })
         .catch((err) => {
           console.error(err);

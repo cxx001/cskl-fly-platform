@@ -140,7 +140,7 @@ export default {
       nodeData: {
         name: '加法器',
         index: 3,
-        dllFile: 'Model/DAdd.so',
+        dllFile: 'Model/libdadd.so',
         fctName: 'demoFunction',
         endpoints: [
           {
