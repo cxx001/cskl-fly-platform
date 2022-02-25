@@ -5,7 +5,7 @@ const state = {
   canvansRef: {},
   attrForm: {
     default: {
-      id: "",
+      id: null,
       name: "",
       isEntity: false,
       entityId: undefined,

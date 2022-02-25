@@ -42,6 +42,12 @@
       </li>
       <li>
         <a-tooltip style="width: 20px; height: 20px">
+          <template slot="title"> 删除 </template>
+          <Delete @click="deleteHandle" />
+        </a-tooltip>
+      </li>
+      <li>
+        <a-tooltip style="width: 20px; height: 20px">
           <template slot="title"> 运行 </template>
           <Run @click="runHandle" />
         </a-tooltip>
@@ -67,6 +73,7 @@ import Gengduo from "@/assets/gengduo.svg";
 import Chexiao from "@/assets/chexiao.svg";
 import Chenzuo from "@/assets/chenzuo.svg";
 import Run from "@/assets/run.svg";
+import Delete from "@/assets/delete.svg";
 
 import utils from "@/utils/utils";
 import { localApi } from "@/api/main";
@@ -81,6 +88,7 @@ export default {
     Chexiao,
     Chenzuo,
     Run,
+    Delete,
   },
 
   data() {
@@ -142,6 +150,14 @@ export default {
     clearHandle() {
       localStorage.removeItem("mockData");
       console.log("clear mockdata!");
+    },
+
+    deleteHandle() {
+      let canvans = this.$store.state.model.canvansRef;
+      let nodeId = this.$store.state.model.attrForm.default.id;
+      if (canvans && nodeId) {
+        canvans.removeNode(nodeId);
+      }
     },
 
     runHandle() {

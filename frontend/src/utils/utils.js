@@ -94,7 +94,7 @@ utils.dataFormat = function (data) {
 
   tempData.Model.Simucfg = {
     '$': { bInherit: '0' },
-    Simu: { '$': { SimuType: "0", Method: "4", Interp: "2", MonteCalo: "0", StartTime: "5", EndTime: "7" } },
+    Simu: { '$': { SimuType: "0", Method: "4", Interp: "2", MonteCalo: "0", StartTime: "5", EndTime: "5.05" } },
     Step: { '$': { bBigStep: "0", MinStep: "0.001", MaxStep: "0.1", NormStep: "0.01" } }
   };
   return tempData;

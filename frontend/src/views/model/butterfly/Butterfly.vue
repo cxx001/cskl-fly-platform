@@ -87,7 +87,7 @@ export default {
       VueCom.canvas.on('system.node.click', (data) => {
         console.log('点击节点:', data);
         let form = {
-          id: data.node.options.nodeData.index,
+          id: data.node.options.id,
           name: data.node.options.nodeData.name,
           isEntity: data.node.options.nodeData.index == 3
         }
