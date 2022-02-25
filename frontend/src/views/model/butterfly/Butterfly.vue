@@ -34,7 +34,7 @@ export default {
             arrow: true,
             type: "endpoint",
             shapeType: "Manhattan",
-            arrowPosition: 0.5,
+            arrowPosition: 0.98,
             defaultAnimate: false,
             draggable: true,
           },

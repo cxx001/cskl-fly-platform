@@ -82,22 +82,22 @@ export default {
       style.position = "absolute";
       if (endpoint.orientation[0] == 1) {
         // right
-        style.right = "0px";
+        style.right = "-10px";
         let offset = endpoint.pos[1];
         style.top = offset * 100 - 10 + "px";
       } else if (endpoint.orientation[0] == -1) {
         // left
-        style.left = "0px";
+        style.left = "-10px";
         let offset = endpoint.pos[1];
         style.top = offset * 100 - 10 + "px";
       } else if (endpoint.orientation[1] == 1) {
         // top
-        style.top = "0px";
+        style.top = "-10px";
         let offset = endpoint.pos[0];
         style.left = offset * 100 + "px";
       } else {
         // bottom
-        style.bottom = "0px";
+        style.bottom = "-10px";
         let offset = endpoint.pos[0];
         style.left = offset * 100 + "px";
       }
