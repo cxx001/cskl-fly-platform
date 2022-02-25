@@ -50,7 +50,9 @@
     <b>飞行仿真项目</b>
     <div>
       <a-modal v-model="visible" title="仿真结果" :footer="null">
-        <p>{{ content }}</p>
+        <div style="white-space: pre-line;">
+          {{ content }}
+        </div>
       </a-modal>
     </div>
   </div>

@@ -300,10 +300,8 @@ class ExampleController extends BaseController {
     const body = ctx.request.body;
     let command = body.command;
     let parameter = body.parameter;
-    await service.example.sendMsgToEngine(command, parameter, (ret) => {
-      this.sendSuccess(ret);
-    });
-    // this.sendSuccess({});
+    let ret = await service.example.sendMsgToEngine(command, parameter);
+    this.sendSuccess(ret);
   }
 }
 

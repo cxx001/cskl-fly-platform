@@ -155,28 +155,30 @@ class ExampleService extends BaseService {
     return true;
   }
 
-  async sendMsgToEngine(command, data, cb) {
-    let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == xhr.DONE) {
-        if (xhr.status == 200) {
-          cb(xhr.responseText);
-        } else { 
-          console.log('send msg fail, status=', xhr.status);
-          cb(xhr.status);
+  sendMsgToEngine(command, data) {
+    return new Promise((resolve, reject) => {
+      let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == xhr.DONE) {
+          if (xhr.status == 200) {
+            resolve(xhr.responseText);
+          } else {
+            console.log('send msg fail, status=', xhr.status);
+            resolve(xhr.status);
+          }
         }
       }
-    }
 
-    let url = 'http://192.168.10.251:9988/' + command;
-    if (command == 'start') {
-      data = latest_xml;
-    }
-    xhr.open('POST', url);
-    xhr.send(data);
-    console.log('send msg command: ', command);
-    console.log('send msg data: ', data);
+      let url = 'http://192.168.10.251:9988/' + command;
+      if (command == 'start') {
+        data = latest_xml;
+      }
+      xhr.open('POST', url);
+      xhr.send(data);
+      console.log('send msg command: ', command);
+      console.log('send msg data: ', data);
+    })
   }
 }
 
