@@ -3,6 +3,7 @@ import { MODEL } from '../mutation-types'
 // initial state
 const state = {
   canvansRef: {},
+  butterflyRef: {},
   attrForm: {
     default: {
       id: null,
@@ -23,6 +24,10 @@ const actions = {
     commit(MODEL.SET_CANVANSREF, canvansRef)
   },
 
+  setButterflyRef({ state, commit }, butterflyRef) {
+    commit(MODEL.SET_BUTTERFLY, butterflyRef)
+  },
+
   setAttrForm({ state, commit }, { key, form }) {
     commit(MODEL.SET_ATTRFORM, { key, form });
   }
@@ -31,7 +36,11 @@ const actions = {
 // mutations
 const mutations = {
   [MODEL.SET_CANVANSREF](state, canvansRef) {
-    state.canvansRef = canvansRef
+    state.canvansRef = canvansRef;
+  },
+
+  [MODEL.SET_BUTTERFLY](state, butterflyRef) {
+    state.butterflyRef = butterflyRef;
   },
 
   [MODEL.SET_ATTRFORM](state, { key, form }) {

@@ -57,6 +57,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.$store.dispatch("model/setButterflyRef", this);
+  },
+
   methods: {
     guid() {
       function S4() {
@@ -80,6 +84,16 @@ export default {
         nodeData: node.nodeData,
       });
     },
+    deleteNode(nodeId) {
+      for (let i = 0; i < this.mockData.nodes.length; i++) {
+        const element = this.mockData.nodes[i];
+        if (element.id == nodeId) {
+          this.mockData.nodes.splice(i, 1);
+          break;
+        }
+      }
+    },
+
     finishLoaded(VueCom) {
       this.$store.dispatch("model/setCanvansRef", VueCom.canvas);
       console.log("finish");

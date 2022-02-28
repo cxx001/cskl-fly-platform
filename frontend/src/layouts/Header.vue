@@ -157,6 +157,7 @@ export default {
       let nodeId = this.$store.state.model.attrForm.default.id;
       if (canvans && nodeId) {
         canvans.removeNode(nodeId);
+        this.$store.state.model.butterflyRef.deleteNode(nodeId);
       }
     },
 
