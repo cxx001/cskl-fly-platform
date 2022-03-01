@@ -28,7 +28,7 @@ module.exports = appInfo => {
   config.cluster = {
     listen: {
       port: electronEggConfig.port || 7068,
-      hostname: electronEggConfig.hostname || '0.0.0.0',
+      hostname: '0.0.0.0', //electronEggConfig.hostname || '0.0.0.0',
       // path: '/var/run/egg.sock',
     },
   };
