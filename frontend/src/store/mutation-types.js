@@ -1,10 +1,10 @@
 export const MODEL = {
   SET_CANVANSREF: 'SET_CANVANSREF',
-  SET_BUTTERFLY: 'SET_BUTTERFLY',
+  SET_VUEREF: 'SET_VUEREF',
   SET_ATTRFORM: 'SET_ATTRFORM',
 }
 
-export const PRODUCTS = {
-  SET_PRODUCTS:'setProducts',
-  DECREMENT_PRODUCT_INVENTORY: 'decrementProductInventory'
+export const VUEREF = {
+  BUTTERFLY:'butterflyRef',
+  BOTTOMPANEL: 'bottomPanelRef',
 }

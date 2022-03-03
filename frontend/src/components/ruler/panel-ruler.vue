@@ -37,8 +37,8 @@
 import SketchRule from "vue-sketch-ruler";
 import PanelGrid from "./panel-grid.vue";
 
-const rectWidth = 1024;
-const rectHeight = 960;
+const rectWidth = 5000;
+const rectHeight = 3000;
 
 export default {
   data() {

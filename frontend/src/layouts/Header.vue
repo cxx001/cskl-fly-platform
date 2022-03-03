@@ -77,6 +77,7 @@ import Delete from "@/assets/delete.svg";
 
 import utils from "@/utils/utils";
 import { localApi } from "@/api/main";
+import { VUEREF } from '@/store/mutation-types';
 
 export default {
   components: {
@@ -157,7 +158,7 @@ export default {
       let nodeId = this.$store.state.model.attrForm.default.id;
       if (canvans && nodeId) {
         canvans.removeNode(nodeId);
-        this.$store.state.model.butterflyRef.deleteNode(nodeId);
+        this.$store.state.model.vueRef[VUEREF.BUTTERFLY].deleteNode(nodeId);
       }
     },
 

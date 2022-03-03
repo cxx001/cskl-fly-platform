@@ -4,7 +4,13 @@
       <LeftPanel />
     </div>
     <div class="flex-item-middle">
-      
+      <PanelTopMenu />
+      <PanelRuler>
+        <template v-slot:butterfly>
+          <Butterfly />
+        </template>
+      </PanelRuler>
+      <BottomPanel />
     </div>
     <div class="flex-item-right">
       <RightPanel />
@@ -13,15 +19,23 @@
 </template>
 
 <script>
+import Butterfly from "./Butterfly.vue";
+import PanelRuler from "@/components/ruler/panel-ruler.vue";
 import LeftPanel from "./LeftPanel.vue";
 import RightPanel from "./RightPanel.vue";
+import BottomPanel from "./BottomPanel.vue";
+import PanelTopMenu from "@/components/panelTopMenu.vue";
 
 export default {
   components: {
+    PanelRuler,
     LeftPanel,
     RightPanel,
+    BottomPanel,
+    PanelTopMenu,
+    Butterfly,
   },
-}
+};
 </script>
 
 <style scoped>
@@ -44,6 +58,10 @@ export default {
   height: 100%;
   z-index: 2;
   position: relative;
+}
+
+.flex-item-middle ::v-deep .butterfly-vue-container {
+  top: 0;
 }
 
 .flex-item-right {

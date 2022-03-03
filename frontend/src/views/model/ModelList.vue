@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import DragNode from "./butterfly/drag-node.vue";
-import NodeData from "./butterfly/node-data.js";
+import DragNode from "@/components/butterfly/drag-node.vue";
+import NodeData from "@/components/butterfly/node-data.js";
 
 export default {
   components: {

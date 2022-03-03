@@ -15,7 +15,7 @@
       <div v-if="pageView == 1">
         <SignalList />
       </div>
-      <div v-if="pageView == 2">
+      <div v-else-if="pageView == 2">
         <VirtualRealList />
       </div>
       <div v-else>

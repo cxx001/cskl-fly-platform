@@ -15,18 +15,28 @@
         </a-popconfirm>
       </li>
     </ul>
+    <LogIcon style="position: absolute; right: 10px; top: 5px" @click="openLog" />
   </div>
 </template>
 
 <script>
 import ErrorIcon from "@/assets/error.svg";
 import WarnIcon from "@/assets/warning.svg";
+import LogIcon from "@/assets/log.svg";
+import { VUEREF } from '@/store/mutation-types';
 
 export default {
   components: {
     ErrorIcon,
     WarnIcon,
+    LogIcon,
   },
+
+  methods: {
+    openLog() {
+      this.$store.state.model.vueRef[VUEREF.BOTTOMPANEL].showDrawer();
+    },
+  }
 };
 </script>
 
