@@ -9,18 +9,19 @@
     "
   >
     <span style="position: absolute; left: 3px; top: -12px"><b>SM</b></span>
-    <div style="margin: 10px 3px">
-      <a-input
-        addon-before="IP"
-        default-value="127.0.0.1"
-        style="width: 50%; float: left"
-      />
-      <a-input
-        addon-before="Port"
-        default-value="8080"
-        style="width: 22%; float: left; margin-left: 5px"
-      />
-      <a-button style="float: right">push</a-button>
+    <div style="margin: 10px 3px; text-align: left; position: absolute; width: 100%">
+      <a-space>
+        <span>仿真节点</span>
+        <a-auto-complete
+          :data-source="nodeSource"
+          style="width: 200px"
+          placeholder="input node name"
+          :filter-option="filterOption"
+          :value="nodeValue"
+          @change="selectNode"
+        />
+      </a-space>
+      <a-button style="float: right; right: 10px">push</a-button>
     </div>
     <div style="height: 210px; border: 2px solid #a1a1a1; margin: 55px 5px">
       <a-badge
@@ -82,8 +83,10 @@ export default {
   data() {
     return {
       dataSource: ["初始输出", "质量", "运动", "加法器"],
+      nodeSource: ["192.168.0.1", "192.168.0.2", "192.168.0.3"],
       tags: ["初始输出", "质量", "运动"],
       inputValue: "",
+      nodeValue: "",
     };
   },
   methods: {
@@ -116,6 +119,9 @@ export default {
     change(value) {
       this.inputValue = value;
       console.log("当前输入节点名: ", value);
+    },
+    selectNode(value) {
+      console.log("选择节点: ", value);
     },
   },
 };
