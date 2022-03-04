@@ -44,7 +44,7 @@
       :width="800"
     >
       <div style="white-space: pre-line; height: 500px">
-        <a-radio-group default-value="1" @change="onChange" style="float: left">
+        <a-radio-group id="simulation-setting-frame" default-value="1" @change="onChange" style="float: left">
           <a-radio-button value="1" style="width: 100px">
             步长/算法
           </a-radio-button>
@@ -108,7 +108,7 @@ export default {
 .ant-modal-title {
   text-align: center;
 }
-.ant-radio-group {
+#simulation-setting-frame {
   position: absolute;
   left: 0px;
   top: 55px;
