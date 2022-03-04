@@ -30,15 +30,43 @@
             <a-icon
               type="setting"
               style="position: relative; right: -160px; top: -50px"
+              @click="settingHandle"
             />
           </div>
         </a-list-item>
       </a-list>
     </div>
+    <a-modal
+      v-model="visible"
+      title="仿真设置"
+      :footer="null"
+      :maskClosable="false"
+      :width="800"
+    >
+      <div style="white-space: pre-line; height: 500px">
+        <a-radio-group default-value="1" @change="onChange" style="float: left">
+          <a-radio-button value="1" style="width: 100px">
+            步长/算法
+          </a-radio-button>
+          <a-radio-button value="2" style="width: 100px">
+            故障注入
+          </a-radio-button>
+        </a-radio-group>
+        <div class="pageview" v-if="pageView == 1">
+          <StepSetting />
+        </div>
+        <div class="pageview" v-else>
+          <FaultInjection />
+        </div>
+      </div>
+    </a-modal>
   </div>
 </template>
 
 <script>
+import StepSetting from "./StepSetting.vue";
+import FaultInjection from "./FaultInjection.vue";
+
 const data = [
   {
     title: "仿真任务1",
@@ -54,14 +82,44 @@ const data = [
   },
 ];
 export default {
+  components: {
+    StepSetting,
+    FaultInjection,
+  },
   data() {
     return {
       data,
+      visible: false,
+      pageView: 1,
     };
+  },
+  methods: {
+    settingHandle() {
+      this.visible = true;
+    },
+    onChange(e) {
+      this.pageView = e.target.value;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style>
+.ant-modal-title {
+  text-align: center;
+}
+.ant-radio-group {
+  position: absolute;
+  left: 0px;
+  top: 55px;
+}
 
+.pageview {
+  width: 99%;
+  height: 84%;
+  border: 1px solid #a1a1a1;
+  position: absolute;
+  top: 92px;
+  left: 4px;
+}
 </style>
